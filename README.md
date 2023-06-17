@@ -1,6 +1,6 @@
 # PromptInspector
 
-PromptInspector is a discord bot based off of [sALTaccount/PromptInspectorBot](https://github.com/sALTaccount/PromptInspectorBot) but in JavaScript
+PromptInspector is a discord bot based off of [sALTaccount/PromptInspectorBot](https://github.com/sALTaccount/PromptInspectorBot) but in JavaScript.
 
 ## Table of Contents
 
