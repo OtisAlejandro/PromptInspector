@@ -1,5 +1,25 @@
-const { Client, GatewayIntentBits, Events, Partials, ActivityType } = require("discord.js");
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers, GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildPresences, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.DirectMessageReactions, GatewayIntentBits.DirectMessageTyping], partials: [Partials.Channel, Partials.Reaction, Partials.Message],});
+const {
+  Client,
+  GatewayIntentBits,
+  Events,
+  Partials,
+  ActivityType,
+} = require("discord.js");
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.DirectMessageReactions,
+    GatewayIntentBits.DirectMessageTyping,
+  ],
+  partials: [Partials.Channel, Partials.Reaction, Partials.Message],
+});
 const monitoredChannels = require("./MONITORED_CHANNELS.json");
 require("dotenv").config();
 
@@ -24,7 +44,10 @@ client.on(Events.MessageCreate, async (message) => {
 
   const { guild, channel } = message;
 
-  if (monitoredChannels.monitoredChannels.includes(channel.id) && message.attachments.size > 0) {
+  if (
+    monitoredChannels.monitoredChannels.includes(channel.id) &&
+    message.attachments.size > 0
+  ) {
     const attachment = message.attachments.first();
     const attachmentURL = attachment.url;
 
@@ -56,7 +79,10 @@ client.on("messageReactionAdd", async (reaction, user) => {
     const { guild, channel } = message;
 
     // Check if the message has attachments
-    if (monitoredChannels.monitoredChannels.includes(channel.id) && message.attachments.size > 0) {
+    if (
+      monitoredChannels.monitoredChannels.includes(channel.id) &&
+      message.attachments.size > 0
+    ) {
       for (const attachment of message.attachments.values()) {
         const attachmentURL = attachment.url;
 
@@ -93,7 +119,11 @@ client.on("messageReactionAdd", async (reaction, user) => {
         // Add embed fields from the parsed parameters
         for (const key in parsedParams) {
           const value = parsedParams[key];
-          embed.addFields({ name: key, value: value, inline: key !== "Prompt" });
+          embed.addFields({
+            name: key,
+            value: value,
+            inline: key !== "Prompt",
+          });
         }
 
         // Send the embed message
@@ -134,10 +164,8 @@ function getParamsFromString(parametersValue) {
   return outputDict;
 }
 
-client.login(process.env.TOKEN)
+client.login(process.env.TOKEN);
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-})
-
-
+});
