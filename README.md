@@ -30,6 +30,7 @@ To install and set up the PromptInspector bot, follow these steps:
 ```shell
 $ git clone https://github.com/your-username/PromptInspector.git
 $ cd PromptInspector
+$ Put your token in the .env file
 $ npm i
 $ node src/index.js
 ```
